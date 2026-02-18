@@ -67,7 +67,7 @@ class PaginationCubit extends Cubit<PaginationState> {
     isLive ? _getLiveDocuments() : _getDocuments();
   }
 
-  _getDocuments() async {
+  void _getDocuments() async {
     final localQuery = _getQuery();
     try {
       if (state is PaginationInitial) {
@@ -89,7 +89,7 @@ class PaginationCubit extends Cubit<PaginationState> {
     }
   }
 
-  _getLiveDocuments() {
+  void _getLiveDocuments() {
     final localQuery = _getQuery();
     if (state is PaginationInitial) {
       refreshPaginatedList();
@@ -135,7 +135,7 @@ class PaginationCubit extends Cubit<PaginationState> {
     var localQuery = (_lastDocument != null)
         ? _query.startAfterDocument(_lastDocument!)
         : _startAfterDocument != null
-            ? _query.startAfterDocument(_startAfterDocument!)
+            ? _query.startAfterDocument(_startAfterDocument)
             : _query;
     localQuery = localQuery.limit(_limit);
     return localQuery;
